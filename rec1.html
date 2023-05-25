@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <title>Crop Recommendation</title>
+    <style>
+        .navbar {
+            display: flex;
+            align-items:center;
+            justify-content:left;
+            position:fixed;
+            top: 0;
+            cursor: pointer;
+        }
+ 
+        .background {
+            background:none;
+            background-blend-mode: darken;
+            background-size: cover;
+        }
+ 
+        .nav-list {
+            width: 70%;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-list li {
+            list-style: none;
+            padding: 26px 30px;
+        }
+ 
+        .nav-list li a {
+            text-decoration: none;
+            color:black;
+        }
+ 
+        .nav-list li a:hover {
+            color: white;
+        }
+
+        *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'poppins',sans-serif;
+}
+body{
+    display:flex;
+    height:100vh;
+    justify-content:center;
+    align-items:center;
+    background: linear-gradient(135deg,#71b7e6,#9b59b6);
+}
+
+form {
+          max-width: 600px;
+          margin: auto;
+        }
+        
+        body {
+        font-family: Arial, sans-serif;
+        }
+
+
+        label {
+          display: inline-block;
+          width: 120px;
+          text-align: right;
+          margin-right: 10px;
+        }
+
+        input[type="number"], select, textarea {
+          width: 200px;
+          padding: 5px;
+          border-radius: 5px;
+          border: 1px solid #4CAF50;
+          margin-bottom: 10px;
+          placeholder='enter'
+        }
+
+        input[type="button"] {
+          background-color: #4CAF50;
+          color: white;
+          padding: 10px 20px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+
+        input[type="button"]:disabled {
+          background-color: #ddd;
+          color: #999;
+          cursor: not-allowed;
+        }
+
+        #recommendation {
+          border: none;
+          padding: 5px;
+          font-size: 16px;
+          font-weight: bold;
+        }
+.container
+{
+    max-width:700px;
+    width:100%;
+    background:#fff;
+    padding:25px 30px;
+    border-radius:5px;
+}
+container.title{
+    font-size:25px;
+    font-weight:500;
+    position:relative;
+}
+.container .title::before{
+    content: '';
+    position:absolute;
+    left:0;
+    bottom:0;
+    height:3px;
+    width: 30px;
+    background:linear-gradient(135deg,#71b7e6,#9b59b6);
+
+}
+.container form .user-details{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    margin:20px 0 12px 0;
+}
+form.user-details .input-box{
+    margin-bottom:15px;
+    width:calc(100% / 2 - 20px );
+}
+.user-details .input-box .details
+{   display:block
+    font-weight : 500;
+    margin-bottom:5px;
+}
+.user-details .input-box input{
+    height:45px;
+    width:100px;
+    outline:none;
+    border-radius:5px;
+    border:1px solid #ccc;
+    padding-left:15px;
+    font-size:16px;
+    border-bottom-width:2px;
+    transition:all 0.3s ease;
+
+}
+.user-details .input-box input:focus,
+.user-details .input-box input:valid{
+     border-color: #9b59b6
+}
+form .gender-details .gender-title{
+    font-size:20px;
+    font-weight:500;
+}
+
+form .gender-details .category
+{
+    display:flex;
+    width:80%;
+    margin:14px 0;
+    justify-content:space-between;
+}
+.gender-details .category label{
+    display: flex;
+    align-items:center;
+ 
+
+}
+.gender-details .category .dot
+{
+    height:18px;
+    width:18px;
+    background:red;
+    border-radius:50%;
+    margin-right:10px;
+    border:5px solid transparent;
+
+}
+#dot-1:checked ~ .category .one,
+#dot-1:checked ~ .category .two,
+#dot-1:checked ~ .category .three,{
+    border-color: #d9d9d9;
+    background :#9b59b6;
+}
+form input[type="radio"]{
+    display:none;
+}
+form .button{
+    height:45px;
+    margin:45px;
+    }
+form .button input{
+    height:100%;
+    width:100%;
+    outline:none;
+    color:#fff;
+    border:none;
+    font-size:18px;
+    font-weight:500;
+    border-radius:5px;
+    letter-spacing:1px;
+    background:linear-gradient(135deg,#71b7e6,#71b7e6,#9b59b6)
+
+}
+form .button input:hover
+{
+    background:linear-gradient(-135deg,#71b7e6,#9b59b6)
+}
+@media (max-width:584px){
+    .container{
+        max-width:100px;
+    }
+    form.user-details .input-box{
+        margin-bottom:15px;
+        width:100%;
+    }
+    form .gender-details .category
+{
+    width:100%;
+    
+}
+.container form .user-details{
+    max-height:300px;
+    overflow-y:scroll;
+}
+.user-details::-webkit-scrollbar{
+    width:0%
+}
+}
+
+    </style>
+ 
+</head>
+<body>
+    <nav class="navbar background">
+        <ul class="nav-list">
+            <li><a href="home.html">Home</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+    
+        <h1>Crop Recommendation</h1>
+        <form>
+            <label for="soil-ph">Soil pH<br></label>
+            <input type="number" id="soil-ph" name="soil-ph" min="0" max="14" step="0.1"><br>
+            <label for="humidity">Humidity<br></label>
+            <input type="number" id="humidity" name="humidity" min="0" max="100" step="1"><br>
+            <label for="npk-level">NPK Level<br></label>
+            <select id="npk-level" name="npk-level">
+                <option value="">Select NPK Level</option>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select><br>
+            <label for="soil-data">soil type:</label>
+            <select id="soil-data" name="soiltype">
+                <option value="">soil type</option>
+                <option value="clay">clay</option>
+                <option value="sandyloam">sandyloam</option>
+                <option value="blacksoil">blacksoil</option>
+            </select><br>
+            <label for="temperature">Temperature:</label>
+            <input type="number" id="temperature" name="temperature" min="-273.15" max="100" step="0.1"><br><br>
+            <input type="button" value="Get Recommendation" onclick="recommendCrop()"><br><br>
+            <label for="recommendation">Recommended Crop:</label>
+            <input type="text" id="recommendation" name="recommendation" readonly size=40px>
+            <!--<textarea id="recommendation" name="recommendation" rows="1" cols="50"></textarea><br>-->
+        </form>
+    
+        <script>
+            function recommendCrop() {
+                const soilPh = parseFloat(document.getElementById("soil-ph").value);
+                const humidity = parseFloat(document.getElementById("humidity").value);
+                const npkLevel = document.getElementById("npk-level").value;
+                const soilData = document.getElementById("soil-data").value;
+                const temperature = parseFloat(document.getElementById("temperature").value);
+    
+            
+                let recommendedCrop = "";
+                if (soilData === "clay") {
+       if (soilPh >= 6 && soilPh <= 7 && humidity >= 50 && npkLevel === "high" && temperature >= 20 && temperature <= 30) {
+          recommendedCrop = "Wheat";
+       } else if (soilPh >= 5 && soilPh <= 7 && humidity >= 60 && humidity <= 80 && npkLevel === "medium" && temperature >= 25 && temperature <= 35) {
+          recommendedCrop = "Rice";
+       }
+    } else if (soilData === "sandyloam") {
+       if (soilPh >= 6 && soilPh <= 7.5 && humidity >= 50 && npkLevel === "high" && temperature >= 20 && temperature <= 30) {
+          recommendedCrop = "Tomato";
+       } else if (soilPh >= 5.5 && soilPh <= 6.5 && humidity >= 60 && humidity <= 80 && npkLevel === "medium" && temperature >= 25 && temperature <= 35) {
+          recommendedCrop = "Watermelon";
+       }
+    } else if (soilData === "blacksoil") {
+       if (soilPh >= 6 && soilPh <= 7 && humidity >= 60 && humidity <= 80 && npkLevel === "medium" && temperature >= 25 && temperature <= 35) {
+          recommendedCrop = "Cotton";
+       } else if (soilPh >= 5.5 && soilPh <= 6.5 && humidity >= 60 && humidity <= 80 && npkLevel === "medium" && temperature >= 25 && temperature <= 35) {
+          recommendedCrop = "Sugarcane";
+       }
+    }else {
+         recommendedCrop = "No recommended crop found for input values.";
+    }
+    
+                document.getElementById("recommendation").value = recommendedCrop;
+            }
+        </script>
+    </body>
+
+</html>
